@@ -1,0 +1,2 @@
+my node test file!
+你好
