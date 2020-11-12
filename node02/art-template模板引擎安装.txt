@@ -1,0 +1,9 @@
+直接进入要下载art-template模板的包下
+
+进入cmd，使用命令： npm install art-template 命令即可
+
+安装成功后会多出来一个node_modules包
+
+使用就<scripte>标签引入即可，详细路径如下：
+
+<script src="../node_modules/art-template/lib/template-web.js"></script>
