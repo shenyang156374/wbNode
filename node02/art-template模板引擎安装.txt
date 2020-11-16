@@ -1,9 +1,12 @@
 直接进入要下载art-template模板的包下
 
-进入cmd，使用命令： npm install art-template 命令即可
+进入cmd，使用命令： npm install art-template 命令即可（好像有问题，报了package.json不存在的错误）
 
 安装成功后会多出来一个node_modules包
 
-使用就<scripte>标签引入即可，详细路径如下：
+直接使用就<scripte>标签引入即可，详细路径如下：
 
 <script src="../node_modules/art-template/lib/template-web.js"></script>
+
+上边的安装好像有问题，报了package.json不存在的错误
+使用webstorm的提示，会帮全局自动创建package.json，同时引入art-template
