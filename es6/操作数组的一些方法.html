@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    //1. map 方法
+    //遍历数组，同时能返回一个新数组，新数组和原数组的长度一致
+    let arr1 = ['小李','小张','小王'];
+    let result1 = arr1.map((item)=>{
+        let obj = {};
+        obj.name = item;
+        obj.test = '测试数据';
+        return obj;
+    })
+    console.log(result1);
+
+    //2. reduce 方法
+    //遍历数组，但是只能返回一个结果。（经常用来处理一些累加平均值之类的问题）
+    let arr2 = [10,20,30,40];
+    let result2 = arr2.reduce((res,value,index)=>{
+        //其中res是一路遍历后的结果，是上一次return的值，第一次就取数组的第一个值
+        //value是本次操作的值
+        //index是本次操作的值的索引
+        if(index === arr2.length-1){
+            return (res+value)/arr2.length;
+        }
+        return res+value;
+    })
+    console.log('平均值为'+result2);
+
+    //3. filter 方法
+    //过滤数组，可以将符合条件的单独筛选到另外一个数组
+    let arr3 = [1,2,3,4,5,6];
+    let result3 = arr3.filter((item)=>{
+        if(item%2!==0){
+            return true;
+        }else{
+            return false;
+        }
+    })
+    console.log('单数有'+result3);
+
+    //4. forEach 方法
+    //遍历（迭代）数组，和jquery的遍历类似
+    let arr4 = ['数据1','数据2','数据3'];
+    arr4.forEach((item,index)=>{
+        console.log('数据为'+item+'索引为'+index);
+    })
+
+
+</script>
+</html>

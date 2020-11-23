@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+
+    let test1 = function (){
+        console.log('普通函数');
+    }
+    test1();
+
+    let test2 = ()=>{
+        console.log('普通箭头函数');
+    }
+    test2();
+
+    //有两种特殊情况可以进一步简化
+    //1. 只有一个参数，可以将()省略掉
+    let test3 = (param)=>{
+        console.log(param);
+    }
+    test3('不省略的情况')
+    let test4 = param=>{
+        console.log(param);
+    }
+    test4('省略()的函数')
+
+    //2. 函数体只有一个返回，可以省略掉{}和return
+    let test5 = ()=>{
+        return '不省略的情况';
+    }
+    console.log(test5());
+    let test6 = ()=>'省略{}return的情况';
+    console.log(test6());
+
+</script>
+</html>

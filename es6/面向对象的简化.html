@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    // 使用es5进行一个对象的封装
+    function User(name){
+        this.name = name;
+    }
+    User.prototype.showName = function (){
+        console.log(this.name);
+    }
+    let user = new User('小王');
+    user.showName();
+    // 使用es5进行对象的继承
+    function VipUser(name,age){
+        User.call(this,name);
+        this.age = age;
+    }
+    VipUser.prototype = new User();
+    VipUser.prototype.constructor = VipUser;
+    VipUser.prototype.showName = function (){
+        console.log(this.name+this.age);
+    }
+    let user1 = new VipUser('小张',10);
+    user1.showName();
+
+    //总结下来，使用es5想做面向对象语法很复杂
+
+    //使用es6实现对象的封装
+    class UserEs6{
+        constructor(name) {
+            this.name = name;
+        }
+        showName(){
+            console.log(this.name);
+        }
+    }
+    let userEs6 = new UserEs6('Es6');
+    userEs6.showName();
+    //使用es6实现对象的继承
+    class VipUserEs6 extends UserEs6{
+        constructor(name,age) {
+            super(name);
+            this.age = age;
+        }
+        showName() {
+            console.log(this.name+this.age);
+        }
+    }
+
+    let vipUserEs6 = new VipUserEs6('Es6Vip',20);
+    vipUserEs6.showName();
+
+
+
+</script>
+</html>

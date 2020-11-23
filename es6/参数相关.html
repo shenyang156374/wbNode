@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    //1. es6可变参数
+    //...args可以把存不下的参数都丢进args这个数组里边，当然，args可以换城其他名称
+    //类似java中的可变参数
+    let test1 = (a,...args)=>{
+        console.log(a);
+        console.log(args);
+    }
+    test1(1,2,3,4);
+
+    //2. es6参数的展开
+    //...arr 和 直接将数组展开没有任何区别
+    //以下边为例， ...arr 和直接写 1,2,3,4 没有区别
+    let arr = [1,2,3,4];
+    test1(...arr);      //和 test1(1,2,3,4) 没有区别
+
+
+</script>
+</html>

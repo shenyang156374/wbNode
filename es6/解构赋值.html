@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    //解构赋值适用于js中的数组和json格式
+    let [a,b] = [1,'测试1'];
+    console.log(a)
+    console.log(b)
+
+    let {c,d} = {c:'测试2',d:'测试2'};
+    console.log(c)
+    console.log(d)
+
+    //复杂点的
+    let [param,json,arr,str] = [111,{j1:'xxx',j2:'bbb'},[1,2,3],'字符串'];
+    console.log(param);
+    console.log(json);
+    console.log(arr);
+    console.log(str);
+</script>
+</html>

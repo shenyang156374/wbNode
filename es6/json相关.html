@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    //1. 当key和变量一致的时候，可以简写
+    let a = '测试1';
+    let b = '测试2';
+    let json = {a,b,c:'测试3'};
+    console.log(json);
+
+    //2. json中可以定义方法，同时方法可以省略function
+    let json1 = {
+        a,
+        funTest(){
+            console.log('测试方法')
+        }
+    };
+    console.log(json1)
+    json1.funTest();
+
+    //3. 将json转换为字符串（非es6方法？）
+    console.log(JSON.stringify(json))
+
+    //4. 将字符串转换为json（非es6方法？）
+    //需要注意的是，key必须加双引号，value字符串也要加双引号，单引号都不行
+    let jsonStr = '{"param1":"xxx","param2":"xx2"}'
+    console.log(JSON.parse(jsonStr))
+</script>
+</html>
