@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * 一个简单的Promise基本使用
+     */
+    let p = new Promise(function (resolve, reject) {
+        $.ajax({
+            url:'xxxxxxxx',
+            dataType:'json',
+            success(res){
+                resolve(res);  //调用成功的方法
+            },
+            error(err){
+                reject(err);   //调用失败的方法
+            }
+        })
+    })
+    p.then(
+        function () {
+            console.log('成功了')
+        },
+        function () {
+            console.log('失败了')
+        }
+    )
+    /**
+     *  其实仅看上边基本的使用，Promise并没有原本的更好用，Promise好用的是all方法
+     *  all方法可以同时处理多个ajax。all方法中第一个参数是所有请求都成功返回结果才会触发，第二个参数只要有一个失败就会被调用
+     *  在成功的方法中，可以从送进来的参数数组中取到各个ajax返回的结果
+     */
+    let p1 = new Promise(function (resolve, reject) {
+        $.ajax({
+            url:'xxxxxxxx1',
+            dataType:'json',
+            success(res){
+                resolve(res);  //调用成功的方法
+            },
+            error(err){
+                reject(err);   //调用失败的方法
+            }
+        })
+    })
+    let p2 = new Promise(function (resolve, reject) {
+        $.ajax({
+            url:'xxxxxxxx2',
+            dataType:'json',
+            success(res){
+                resolve(res);  //调用成功的方法
+            },
+            error(err){
+                reject(err);   //调用失败的方法
+            }
+        })
+    })
+    Promise.all([
+        p1,p2
+    ]).then(function (resArr) {
+        console.log('请求全部都成功了')
+        let [res1,res2] = resArr;
+    },function () {
+        console.log('请求至少有一个失败了')
+    })
+
+    /**
+     * 实际开发中，可以对上边的方法进行简单的封装，封装后代码能够大大减少
+     */
+    function createPromise(url) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url:url,
+                dataType:'json',
+                success(res){
+                    resolve(res);  //调用成功的方法
+                },
+                error(err){
+                    reject(err);   //调用失败的方法
+                }
+            })
+        })
+    }
+    Promise.all([
+        createPromise('xxxx1'),
+        createPromise('xxxx2')
+    ]).then(function (resArr) {
+        console.log('请求全部都成功了')
+        let [res1,res2] = resArr;
+    },function () {
+        console.log('请求至少有一个失败了')
+    })
+
+    /**
+     * jquery其实对Promise已经有封装
+     */
+    Promise.all([
+        $.ajax({url:'xxxx',dataType:'json'}),
+        $.ajax({url:'xxxx',dataType:'json'}),
+    ]).then(function (res) {
+        let [res1,res2] = res;
+        console.log('成功了');
+    },function () {
+        console.log('失败了');
+    })
+
+    /**
+     * Promise还有一个race方法，同时发出多个ajax请求，但只接收一个结果（最快返回的那个）
+     */
+    Promise.race([
+        $.ajax({url:'xxxx1',dataType:'json'}),
+        $.ajax({url:'xxxx2',dataType:'json'}),
+        $.ajax({url:'xxxx3',dataType:'json'}),
+        $.ajax({url:'xxxx4',dataType:'json'}),
+    ])
+
+    /**
+     * Promise还可以解决回调地狱，但是单单使用Promise还不够，需要配合generator一起使用，具体看generator
+     */
+
+
+
+</script>
+</html>

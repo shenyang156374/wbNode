@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * generator简单示例，可以控制函数的执行，可以让函数运行中暂停
+     * 需要将*号标识在function后边或者方法名的前边
+     */
+    function* test1() {
+        alert('aaa');
+        yield;  //暂停
+        alert('bbb');
+    }
+    //如果需要测试打开注释
+    //let test1Param = test1();
+    //test1Param.next();  //函数开始执行，执行到暂停处
+    //test1Param.next();  //函数从第一个暂停处继续执行
+
+    /**
+     * 仅仅暂停方法，没有任何意义。需要配合传参，返回值一起使用
+     * 需要注意的是，第一个next方法仅仅是启动方法，传入的参数没有任何作用，第一个暂停返回的结果其实是第二个next方法传入的内容
+     */
+    function* test2() {
+        alert('aaa');
+        let param = yield;
+        alert(param);
+        alert('bbb')
+    }
+    //如果需要测试打开注释
+    //let test2Param = test2();
+    //test2Param.next();   //第一个next无需参数，如果第一个暂停前边真的需要什么参数，应该是从调用方法传递的参数中提供
+    //test2Param.next(222);
+
+    /**
+     * 使用返回值
+     * 和传参相反，第一个next返回的值，是在第一个next中的，最后一个next的返回值是没有值的，没有意义的(不如作为整个方法的一个返回值返回)
+     */
+    function* test3() {
+        alert('aaa');
+        yield 111;
+        alert('bbb');
+    }
+    //如果需要测试打开注释
+    //let test3Param = test3();
+    //let res = test3Param.next();    //返回值格式为 {value:111,done:false}
+    //let res1 = test3Param.next();   //最后一个next的返回值格式为 {value:undefined,done:true}
+    //console.log(res);
+    //console.log(res1);
+
+    /**
+     * 使用generator和Promise配合可以完美解决回调地狱的问题
+     */
+
+    //如果想ajax实现同步，只能在一个ajax的成功回调中去调用另外一个，当调用多起来就很复杂
+    /*$.ajax({
+        url:xxx,
+        dateType:'json',
+        success(){
+            $.ajax({
+                url:xxx,
+                dateType:'json',
+                success() {
+                    xxxxxxxxx
+                }
+            })
+        }
+    })*/
+
+    //单使用Promise，不使用generator.碰到需要同步的时候，依然是回调地狱解决不了问题
+    Promise.all([
+        $.ajax({url:'xxxx',dataType:'json'}),
+    ]).then(success=>{
+            Promise.all([
+                $.ajax({url:'xxxx',data:success,dataType:'json'})
+            ]).then(success=>{
+                xxxxxxx
+                xxxxxxx
+            },err=>{
+
+            })
+    },err=>{
+
+    })
+
+    //使用Promise+generator，解决回调地狱(视频中要封装一个runner)
+    function* test3(){
+        let p1 =yield $.ajax({url:'xxxx',dataType:'json'})
+
+        yield $.ajax({url:'xxxx',data:p1,dataType:'json'})
+    }
+
+
+
+
+
+
+</script>
+</html>
